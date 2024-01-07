@@ -1,0 +1,145 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-button slot="start" class="back-button">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-button>
+    <ion-title>Create Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- <ion-avatar>
+    <ion-img src="assets/imgs/1.jpg"></ion-img>
+  </ion-avatar> -->
+  <form #sign="ngForm" (ngSubmit)="onSubmit(sign)">
+    <ion-list lines="none">
+      <ion-item color="light">
+        <ion-icon name="person" slot="start" color="primary"></ion-icon>
+        <ion-input
+          type="text"
+          name="name"
+          ngModel
+          #name="ngModel"
+          placeholder="Name"
+          required="true"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="!name.valid && name.touched">
+        <p>* please enter your name</p></ion-text
+      >
+      <ion-item color="light" class="ion-margin-top">
+        <ion-icon name="call" slot="start" color="primary"></ion-icon>
+        <ion-input
+          type="tel"
+          name="phone"
+          ngModel
+          #phone="ngModel"
+          placeholder="Phone Number"
+          required="true"
+          minlength="10"
+          maxlength="10"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="!phone.valid && phone.touched">
+        <p>* please enter a valid phone number</p></ion-text
+      >
+      <ion-item color="light" class="ion-margin-top">
+        <ion-icon name="mail" slot="start" color="primary"></ion-icon>
+        <ion-input
+          type="email"
+          name="email"
+          email
+          ngModel
+          #emailCtrl="ngModel"
+          placeholder="Email"
+          required="true"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="!emailCtrl.valid && emailCtrl.touched">
+        <p>* please enter a valid email address</p></ion-text
+      >
+      <ion-item color="light" class="ion-margin-top">
+        <ion-icon name="key" slot="start" color="primary"></ion-icon>
+        <ion-icon
+          color="primary"
+          slot="end"
+          (click)="changeType()"
+          [name]="type ? 'eye-off-outline': 'eye-outline'"
+        ></ion-icon>
+        <ion-input
+          [type]="type ? 'password': 'text'"
+          name="password"
+          ngModel
+          #passwordCtrl="ngModel"
+          placeholder="Password"
+          password
+          required="true"
+          minlength="8"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="!passwordCtrl.valid && passwordCtrl.touched"
+      >
+        <p>* password must be min 8 characters</p></ion-text
+      >
+      <ion-item color="light" class="ion-margin-top">
+        <ion-icon name="key" slot="start" color="primary"></ion-icon>
+        <ion-icon
+          color="primary"
+          slot="end"
+          (click)="changeType()"
+          [name]="type ? 'eye-off-outline': 'eye-outline'"
+        ></ion-icon>
+        <ion-input
+          [type]="type ? 'password': 'text'"
+          name="c_password"
+          ngModel
+          #c_passwordCtrl="ngModel"
+          placeholder="Confirm Password"
+          password
+          required="true"
+          minlength="8"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="!c_passwordCtrl.valid && c_passwordCtrl.touched"
+      >
+        <p>* Password must be min 8 characters</p></ion-text
+      >
+      <ion-text
+        color="danger"
+        *ngIf="c_passwordCtrl.valid && c_passwordCtrl.value != passwordCtrl.value"
+      >
+        <p>* Confirm password should be matched with Password</p>
+      </ion-text>
+    </ion-list>
+    <div>
+      <ion-button
+        [disabled]="!sign.valid || c_passwordCtrl.value != passwordCtrl.value"
+        expand="block"
+        shape="round"
+        type="submit"
+        color="primary"
+        >SIGN UP</ion-button
+      >
+      <div class="ion-text-center" *ngIf="isLogin">
+        <ion-button shape="round" color="primary" [disabled]="!sign.valid">
+          <ion-spinner name="circles"></ion-spinner>
+        </ion-button>
+      </div>
+    </div>
+  </form>
+  <!-- <ion-text class="ion-text-center signUp" routerLink="/login/signup">
+    <p>
+      don't have an account?
+      <b>Sign Up</b>
+    </p>
+  </ion-text> -->
+</ion-content>

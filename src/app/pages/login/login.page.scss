@@ -1,0 +1,21 @@
+ion-avatar {
+  width: 20vh;
+  height: 20vh;
+  margin: 10vh auto;
+
+  ion-img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+ion-button {
+  margin-top: 5vh;
+}
+.forgotStyle {
+  font-weight: bolder;
+}
+.signUp {
+  margin-top: 5vh;
+  color: var(--ion-color-primary);
+}

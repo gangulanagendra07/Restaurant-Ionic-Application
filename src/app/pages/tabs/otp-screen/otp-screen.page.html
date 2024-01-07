@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Email Verification</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="none">
+    <ion-list-header class="ion-margin">
+      <ion-label> Email Verification Code </ion-label>
+    </ion-list-header>
+    <ion-item class="ion-margin" lines="none">
+      <div class="ion-padding-top" align="center">
+        <!-- <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="config">
+        </ng-otp-input> -->
+        <app-otp-input
+          (otpLength)="otpLength($event)"
+          (onOTPChangeEvent)="onOtpChange($event)"
+        ></app-otp-input>
+      </div>
+    </ion-item>
+    <ion-item class="ion-margin-horizontal">
+      <ion-button fill="clear" color="primary" slot="start" (click)="resend()">
+        RESEND
+      </ion-button>
+      <ion-fab-button slot="end" (click)="verify()">
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

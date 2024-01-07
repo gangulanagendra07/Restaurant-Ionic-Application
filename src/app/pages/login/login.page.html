@@ -1,0 +1,121 @@
+<ion-content class="ion-padding">
+  <ion-avatar>
+    <ion-img src="assets/imgs/1.jpg"></ion-img>
+  </ion-avatar>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list lines="none">
+      <ion-item color="light">
+        <ion-icon name="mail" slot="start" color="primary"></ion-icon>
+        <ion-input
+          type="email"
+          name="email"
+          id="email"
+          email
+          ngModel
+          #emailCtrl="ngModel"
+          value="email"
+          placeholder="Email"
+          required="true"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="!emailCtrl.valid && emailCtrl.touched">
+        <p>* please enter a valid email address</p></ion-text
+      >
+      <ion-item color="light" class="ion-margin-top">
+        <ion-icon name="key" slot="start" color="primary"></ion-icon>
+        <ion-icon
+          color="primary"
+          slot="end"
+          (click)="changeType()"
+          [name]="type ? 'eye-off-outline': 'eye-outline'"
+        ></ion-icon>
+        <ion-input
+          [type]="type ? 'password': 'text'"
+          name="password"
+          ngModel
+          #passwordCtrl="ngModel"
+          placeholder="Password"
+          password
+          required="true"
+          minlength="8"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="!passwordCtrl.valid && passwordCtrl.touched"
+      >
+        <p>* password must be min 8 characters</p></ion-text
+      >
+    </ion-list>
+    <!-- <p class="ion-text-right forgotStyle">
+      <ion-text routerLink="/login/forgot-password">Forgot password?</ion-text>
+    </p> -->
+    <p class="ion-text-right forgotStyle">
+      <ion-text id="forgot-password">Forgot password?</ion-text>
+    </p>
+    <div>
+      <ion-button
+        *ngIf="!isLogin"
+        [disabled]="!f.valid"
+        expand="block"
+        shape="round"
+        type="submit"
+        color="primary"
+        >SIGN IN</ion-button
+      >
+      <div class="ion-text-center" *ngIf="isLogin">
+        <ion-button shape="round" color="primary" [disabled]="!f.valid">
+          <ion-spinner name="circles"></ion-spinner>
+        </ion-button>
+      </div>
+    </div>
+  </form>
+  <ion-text class="ion-text-center signUp" routerLink="/login/signup">
+    <p>
+      don't have an account?
+      <b>Sign Up</b>
+    </p>
+  </ion-text>
+  <!-- Ion Modal -->
+  <ion-modal
+    #forgot_pwd_modal
+    trigger="forgot-password"
+    [initialBreakpoint]="0.50"
+    [breakpoints]="[0, 0.50, 0.75, 0.9]"
+    (willDismiss)="onWillDismiss($event)"
+    (ionModalDidDismiss)="reset($event)"
+  >
+    <ng-template>
+      <app-reset-password
+        [model]="reset_password_Model"
+        (checkEmail)="sendEmailOtp($event)"
+        (verify_otp)="verityResetOtp($event)"
+        (set_password)="resetPassword($event)"
+      ></app-reset-password>
+      <!-- <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Welcome</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header> -->
+      <!-- <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="Enter your name"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="Your name"
+            [(ngModel)]="name"
+          ></ion-input>
+        </ion-item>
+      </ion-content> -->
+    </ng-template>
+  </ion-modal>
+</ion-content>
